@@ -1,0 +1,21 @@
+#!/bin/bash
+# This code generates number that is sent into a file called input.
+# The idea is to simualte this command $(cat input| wc -l) on a constanly
+# growing file eg log. 
+
+IFS=$(echo -en "\n\b")    # important: sets entries to new line
+numbers=`cat input`
+if [[ $numbers = "" ]]; then # if the file is empty 
+	count=1			# set counter to one
+else
+	count=$numbers		# if it contains a number
+				# use that number
+fi
+while [ $count -lt 63498 ]; do	# the upper limit is the total element in 
+	count=$((count+20))	# comparing (fixed) file. increase by 20
+	echo $count > input	# put the increased value in the file 'ouput'
+	sleep 10
+done
+IFS=$SAVEIFS
+echo "done"
+
