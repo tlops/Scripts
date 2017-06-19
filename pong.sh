@@ -5,13 +5,14 @@ argse="$1"
 pong (){
 	ping -c 1 $argse 2>&1 > /dev/null
 }
-
+failedcount=0
 if [ $# -eq 1 ]; then
 	
 	while true; do
 		pong
 		if [ $? -ne 0 ]; then
-			echo "CRITICAL: The host $argse is down"
+			((failedcount++))
+			echo "CRITICAL: The host $argse is down. $failedcount attempt."
 			sleep 30
 
 		else
