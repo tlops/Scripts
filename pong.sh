@@ -19,12 +19,14 @@ processing (){
 	while [ $failedcount -lt 100 ]; do
 		pong
 		if [ $? -ne 0 ]; then
+			# loop counter
 			((failedcount++))
 			echo "CRITICAL: The host $argse is down. $failedcount attempt."
 			sleep 60
 
 		else
 			echo "OK: the host $argse is UP!"
+			# increase the counter to break the loop
 			failedcount=$(($failedcount+100))
 		fi
 
