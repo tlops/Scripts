@@ -1,0 +1,19 @@
+#!/bin/bash
+readonly VARTYPE='{ read __; 
+       case "`declare -p "$__"`" in
+            "declare -a"*) echo array;; 
+            "declare -A"*) echo hash;; 
+            "declare -- "*) echo scalar;; 
+       esac; 
+         } <<<'
+
+a=scalar
+b=( array ) 
+declare -A c; c[hashKey]=hashValue;
+abc=(a b c s d f)
+
+###########################
+eval "$VARTYPE" a #scalar
+eval "$VARTYPE" b #array
+eval "$VARTYPE" c #hash
+eval "$VARTYPE" abc
