@@ -9,6 +9,12 @@
 argse="$1"
 login="$2"
 
+# Color code           
+green='\033[0;32m'     
+NC='\033[0m' # No colo 
+red='\033[0;31m'       
+yellow='\033[0;33m'    
+
 pong (){
 	ping -c 1 $argse 2>&1 > /dev/null
 }
@@ -21,11 +27,11 @@ processing (){
 		if [ $? -ne 0 ]; then
 			# loop counter
 			((failedcount++))
-			echo "CRITICAL: The host $argse is down. $failedcount attempt."
+			echo -e "${red}CRITICAL:${NC} The host ${yellow}$argse${NC} is ${red}down!${NC} $failedcount attempt."
 			sleep 60
 
 		else
-			echo "OK: the host $argse is UP!"
+			echo -e "${green}OK:${NC} the host ${yellow}$argse${NC} is ${green}UP!${NC}"
 			# increase the counter to break the loop
 			failedcount=$(($failedcount+100))
 		fi
