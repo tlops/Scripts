@@ -1,0 +1,37 @@
+#!/bin/bash
+## week is counting up while days are counting down
+# Output
+#This is the 2 week
+#Running for the 7 days
+#Running for the 6 days
+#Running for the 5 days
+#Running for the 4 days
+#Running for the 3 days
+#Running for the 2 days
+#Running for the 1 days
+#This is the 3 week
+#Running for the 7 days
+#Running for the 6 days
+#Running for the 5 days
+#Running for the 4 days
+#Running for the 3 days
+
+
+countw=1
+countd=1
+week=5
+days=7
+while [[ $countw -le $week ]]; do
+	echo "This is the $countw week"  
+	((countw++))
+	while [[ $days -ge $countd ]]; do  # count down
+        	echo "Running for the $days days"
+        	#echo $days
+        	sleep 1
+        	((days--))
+	done
+# reset the days
+days=7 
+done
+
+echo "done"
